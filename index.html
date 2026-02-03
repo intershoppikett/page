@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Störungsmeldung – Intershop Pikett</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 520px;
+            margin: auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+        input, select, textarea, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button {
+            margin-top: 20px;
+            background: #c62828;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #b71c1c;
+        }
+        .hint {
+            font-size: 12px;
+            color: #555;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Störungsmeldung – Heizung & Infrastruktur</h1>
+
+    <form method="POST" action="http://147.93.56.228:8080/webhook/heizungsstoerung">
+
+        <!-- Sicherheits-Token -->
+        <input type="hidden" name="token" value="INTERSHOP-ALARM-2026">
+
+        <!-- Liegenschaft -->
+        <label for="objekt">Liegenschaft *</label>
+        <select id="objekt" name="objekt" required>
+            <option value="">Bitte auswählen</option>
+            <option>Nordstrasse, Wohlen</option>
+            <option>Uetlibergstrasse 132, Zürich</option>
+            <option>Uetlibergstrasse 134A, Zürich</option>
+            <option>Uetlibergstrasse 134B, Zürich</option>
+            <option>Staffelstrasse 8, Zürich</option>
+            <option>Staffelstrasse 10, Zürich</option>
+            <option>Staffelstrasse 12, Zürich</option>
+            <option>Media Campus, Zürich</option>
+            <option>Rautistrasse 33, Zürich</option>
+            <option>Puls 5, Zürich</option>
+        </select>
+
+        <!-- Störung -->
+        <label for="stoerung">Art der Störung *</label>
+        <select id="stoerung" name="stoerung" required>
+            <option value="">Bitte auswählen</option>
+
+            <optgroup label="Heizung / Warmwasser">
+                <option>Heizung kalt</option>
+                <option>Heizung unregelmässig</option>
+                <option>Warmwasser fehlt</option>
+            </optgroup>
+
+            <optgroup label="Strom">
+                <option>Stromausfall komplett</option>
+                <option>Teilweiser Stromausfall</option>
+            </optgroup>
+
+            <optgroup label="Lift">
+                <option>Lift ausser Betrieb</option>
+                <option>Lift steckt fest</option>
+            </optgroup>
+
+            <optgroup label="Lüftung">
+                <option>Lüftung ausgefallen</option>
+                <option>Lüftung Störung</option>
+            </optgroup>
+
+            <optgroup label="Parkplatz / Garage">
+                <option>Tor / Schranke defekt</option>
+                <option>Zufahrt blockiert</option>
+            </optgroup>
+
+            <optgroup label="Sonstiges">
+                <option>Schliessung / Zutritt nicht möglich</option>
+                <option>Allgemeine Störung</option>
+            </optgroup>
+        </select>
+
+        <!-- Dringlichkeit -->
+        <label for="dringlichkeit">Dringlichkeit</label>
+        <select id="dringlichkeit" name="dringlichkeit">
+            <option value="normal">Normal</option>
+            <option value="dringend">Dringend</option>
+        </select>
+
+        <!-- Beschreibung -->
+        <label for="beschreibung">Beschreibung *</label>
+        <textarea id="beschreibung" name="beschreibung" rows="4" required></textarea>
+
+        <!-- Kontakt -->
+        <label for="kontakt">Kontakt (optional)</label>
+        <input type="text" id="kontakt" name="kontakt" placeholder="Name / Telefon / E-Mail">
+
+        <button type="submit">Störung melden</button>
+
+        <div class="hint">
+            Bei akuter Gefahr bitte zusätzlich telefonisch melden.
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
